@@ -13,8 +13,8 @@ public class Main {
 
         do {
             // asking user.
-            System.out.println("Welcome to the Accounting Ledger Application!");
-            System.out.println("What would you like to do?");
+            System.out.println("\n\n---------------Welcome to the Accounting Ledger Application!---------------");
+            System.out.println("\nWhat would you like to do?");
             System.out.println("\t[D] Add Deposit");
             System.out.println("\t[P] Make a Payment (Debit)");
             System.out.println("\t[L] Ledger");
@@ -66,6 +66,9 @@ public class Main {
 // collecting information from the user about the transactions.
 
     public static String[] informationCollected(Scanner scanner) {
+
+
+
         System.out.print("Please enter item description: ");
         String description = scanner.nextLine();
 

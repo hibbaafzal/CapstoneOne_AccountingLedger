@@ -20,8 +20,8 @@ public class Ledger {
 
         do {
 
-            System.out.println("Welcome to the Ledger Home Page!");
-            System.out.println("What would you like to do?");
+            System.out.println("\n\n---------------Welcome to the Ledger Home Page!---------------");
+            System.out.println("\nWhat would you like to do?");
             System.out.println("\t[A] Display all entries.");
             System.out.println("\t[D] Display only deposits.");
             System.out.println("\t[P] Display only payments.");
@@ -35,6 +35,7 @@ public class Ledger {
 
                 case "A":
                     // all entries
+                    System.out.println("-------------All Entries-------------");
 
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
@@ -51,7 +52,7 @@ public class Ledger {
                     break;
 
                 case "D":
-
+                    System.out.println("-------------Deposits-------------");
                     // deposits only so we filter for deposits only.
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
@@ -72,6 +73,7 @@ public class Ledger {
                     break;
 
                 case "P":
+                    System.out.println("-------------Payments-------------");
                     // payments only, so we filter for payments only.
 
                     try {
@@ -135,7 +137,7 @@ public class Ledger {
     public static void customReports(Scanner scanner) {
         int customSearchChoice;
         do {
-            System.out.println("Which custom report would you like to see?");
+            System.out.println("\nWhich custom report would you like to see?");
             System.out.println("\t[1] Month to Date?");
             System.out.println("\t[2] Previous month.");
             System.out.println("\t[3] Year to date.");
@@ -155,6 +157,9 @@ public class Ledger {
             switch (customSearchChoice) {
                 // month to date
                 case 1:
+
+
+                    System.out.println("------------------Month to Date----------------");
                     // for each loop
                     for (String ledgerTransaction : ledger) {
                         String[] splitInput = ledgerTransaction.split("\\|");
@@ -174,6 +179,7 @@ public class Ledger {
 
                 // previous month
                 case 2:
+                    System.out.println("------------------Previous Month----------------");
                     for (String ledgerTransaction : ledger) {
                         String[] splitInput = ledgerTransaction.split("\\|");
                         if (splitInput.length > 0 && !splitInput[0].trim().isEmpty()) {
@@ -190,6 +196,7 @@ public class Ledger {
                     break;
                 // year to date
                 case 3:
+                    System.out.println("------------------Year to Date----------------");
                     for (String ledgerTransaction : ledger) {
                         try {
                             LocalDate dateOfTransaction = LocalDate.parse(ledgerTransaction.split("\\|")[0]);
@@ -203,6 +210,7 @@ public class Ledger {
                     break;
                 // previous year
                 case 4:
+                    System.out.println("------------------Previous Year-----------------");
                     for (String ledgerTransaction : ledger) {
                         try {
                             LocalDate dateOfTransaction = LocalDate.parse(ledgerTransaction.split("\\|")[0]);
@@ -216,6 +224,7 @@ public class Ledger {
                     break;
                 // vendor
                 case 5:
+                    System.out.println("------------------Search by Vendor----------------");
                     System.out.print("\nPlease enter the vendor name: ");
 
                     // Case-insensitivity and trim whitespace.
@@ -254,15 +263,26 @@ public class Ledger {
     // deposits are positive
     public static void addDepositInformation(String[] depositInformation) {
 
+
+        // formatting
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+
         LocalDateTime dateTime = LocalDateTime.now();
-        String formattedDate = dateTime.format(formatter);
+        String formattedDateTime = dateTime.format(formatter);
+
+
         String descriptionProvided = depositInformation[0];
+
         String vendorProvided = depositInformation[1];
+
         double dollarAmount = Double.parseDouble(depositInformation[2]);
-        String informationProvided = String.format("%s|%s|%s|$%.2f\n", formattedDate, descriptionProvided, vendorProvided, (dollarAmount));
+        String informationProvided = String.format("%s|%s|%s|$%.2f\n", formattedDateTime, descriptionProvided, vendorProvided, (dollarAmount));
 
         enterInformationIntoFile(informationProvided);
-        System.out.println("\n\nYour deposit has been added successfully!\n\n");
+        System.out.println("\n\n***Your deposit has been added successfully!***\n\n");
 
     }
+
+// static method to add the payment information into the file.
+    // payments are negative
+
