@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Ledger {
 
 
-
     // static method for the ledger home page.
     public static void homePage(Scanner scanner) {
 
@@ -38,17 +37,17 @@ public class Ledger {
                     // all entries
 
                     try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
-                    String input;
-                    while ((input = bufferedReader.readLine()) != null) {
+                        String input;
+                        while ((input = bufferedReader.readLine()) != null) {
 
-                        System.out.println(input);
+                            System.out.println(input);
 
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Error!");
                     }
-                } catch (IOException e) {
-                    System.out.println("Error!");
-                }
                     break;
 
                 case "D":
@@ -61,6 +60,7 @@ public class Ledger {
                         while ((input = bufferedReader.readLine()) != null) {
 
                             String[] splitInput = input.split("\\|");
+                            //  condition
                             if (!splitInput[splitInput.length - 1].contains("-")) {
                                 System.out.println(input);
 
@@ -75,20 +75,22 @@ public class Ledger {
                     // payments only, so we filter for payments only.
 
                     try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
-                    String input;
-                    while ((input = bufferedReader.readLine()) != null) {
-                        String[] splitInput = input.split("\\|");
-                        if (splitInput[splitInput.length - 1].contains("-")) {
-                            System.out.println(input);
+                        String input;
+                        while ((input = bufferedReader.readLine()) != null) {
+                            String[] splitInput = input.split("\\|");
+
+                            // condition
+                            if (splitInput[splitInput.length - 1].contains("-")) {
+                                System.out.println(input);
 
 
+                            }
                         }
+                    } catch (IOException e) {
+                        System.out.println("Error!");
                     }
-                } catch (IOException e) {
-                    System.out.println("Error!");
-                }
                     break;
 
                 case "R":
@@ -112,6 +114,7 @@ public class Ledger {
     // reads from the transactions file and returns an arraylist.
 
     public static List<String> ledgerDataReports() {
+        // stores it into strings
         List<String> ledgerData = new ArrayList<>();
 
         try {
@@ -146,15 +149,16 @@ public class Ledger {
             LocalDate date = LocalDate.now();
             int month = date.getMonthValue();
             int year = date.getYear();
-           List<String> ledger = ledgerDataReports();
+            List<String> ledger = ledgerDataReports();
             StringBuilder output = new StringBuilder();
 
             switch (customSearchChoice) {
                 // month to date
                 case 1:
-
+                    // for each loop
                     for (String ledgerTransaction : ledger) {
                         String[] splitInput = ledgerTransaction.split("\\|");
+
                         if (splitInput.length > 0 && !splitInput[0].trim().isEmpty()) {
                             try {
                                 LocalDate transactionDate = LocalDate.parse(splitInput[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -245,3 +249,20 @@ public class Ledger {
         } while (customSearchChoice != 0);
     }
 
+
+    // adds deposit information into the file.
+    // deposits are positive
+    public static void addDepositInformation(String[] depositInformation) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+        String formattedDate = dateTime.format(formatter);
+        String descriptionProvided = depositInformation[0];
+        String vendorProvided = depositInformation[1];
+        double dollarAmount = Double.parseDouble(depositInformation[2]);
+        String informationProvided = String.format("%s|%s|%s|$%.2f\n", formattedDate, descriptionProvided, vendorProvided, (dollarAmount));
+
+        enterInformationIntoFile(informationProvided);
+        System.out.println("\n\nYour deposit has been added successfully!\n\n");
+
+    }
