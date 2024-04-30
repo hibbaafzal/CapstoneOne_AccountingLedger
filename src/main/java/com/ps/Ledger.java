@@ -2,7 +2,9 @@ package com.ps;
 
 import java.io.*;
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,9 +31,18 @@ public class Ledger {
 
             switch (commandLedger) {
                 case "A":
+                    // all entries
+                    try {
+                        BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
-                    // all entries (therefore no filter is needed)
-                    ledgerDataReports("all reports");
+                        String input;
+                        while ((input = bufferedReader.readLine()) != null) {
+                            System.out.println(input);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error!");
+                    }
+
                     break;
 
                 case "D":
@@ -65,7 +76,6 @@ public class Ledger {
     // reads from the transactions file and returns an arraylist.
     public static List<String> ledgerDataReports() {
         List<String> ledgerData = new ArrayList<>();
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
@@ -81,8 +91,7 @@ public class Ledger {
 
     // filters the transactions according to what the user chooses.
     public static void ledgerDataReports(String customReportsFilter) {
-        List<String> ledger = new ArrayList<>();
-
+        List<String> ledgerTransactions = new ArrayList<>();
 
 
         switch (customReportsFilter) {
@@ -94,12 +103,12 @@ public class Ledger {
 
                     String input;
                     while ((input = bufferedReader.readLine()) != null) {
-                        ledger.add(input);
+                        ledgerTransactions.add(input);
                     }
                 } catch (IOException e) {
                     System.out.println("Error!");
                 }
-                displayLedgerData(ledger);
+                displayLedgerData(ledgerTransactions);
                 break;
 
             // deposits only (positive)
@@ -112,16 +121,16 @@ public class Ledger {
 
                         String[] splitInput = input.split("\\|");
                         if (!splitInput[splitInput.length - 1].contains("-")) {
-                            ledger.add(input);
+                            ledgerTransactions.add(input);
                         }
                     }
                 } catch (IOException e) {
                     System.out.println("Error!");
                 }
-                displayLedgerData(ledger);
+                displayLedgerData(ledgerTransactions);
                 break;
 
-                // payments only (negative)
+            // payments only (negative)
             case "payments only":
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
@@ -130,13 +139,13 @@ public class Ledger {
                     while ((input = bufferedReader.readLine()) != null) {
                         String[] splitInput = input.split("\\|");
                         if (splitInput[splitInput.length - 1].contains("-")) {
-                            ledger.add(input);
+                            ledgerTransactions.add(input);
                         }
                     }
                 } catch (IOException e) {
                     System.out.println("Error!");
                 }
-                displayLedgerData(ledger);
+                displayLedgerData(ledgerTransactions);
                 break;
         }
     }
@@ -171,3 +180,100 @@ public class Ledger {
             int year = date.getYear();
             List<String> ledger = ledgerDataReports();
             StringBuilder output = new StringBuilder();
+
+            switch (customSearchChoice) {
+                // month to date
+                case 1:
+
+                    for (String ledgerTransaction : ledger) {
+                        String[] splitInput = ledgerTransaction.split("\\|");
+                        if (splitInput.length > 0 && !splitInput[0].trim().isEmpty()) {
+                            try {
+                                LocalDate transactionDate = LocalDate.parse(splitInput[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                                if (transactionDate.getMonthValue() == month && transactionDate.getYear() == year) {
+                                    output.append(ledgerTransaction).append("\n");
+                                }
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Error!");
+                            }
+                        }
+                    }
+                    break;
+
+                // previous month
+                case 2:
+                    for (String ledgerTransaction : ledger) {
+                        String[] splitInput = ledgerTransaction.split("\\|");
+                        if (splitInput.length > 0 && !splitInput[0].trim().isEmpty()) {
+                            try {
+                                LocalDate dateOfTransaction = LocalDate.parse(splitInput[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                                if (dateOfTransaction.getMonthValue() == month - 1 && dateOfTransaction.getYear() == year) {
+                                    output.append(ledgerTransaction).append("\n");
+                                }
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Error!");
+                            }
+                        }
+                    }
+                    break;
+                // year to date
+                case 3:
+                    for (String ledgerTransaction : ledger) {
+                        try {
+                            LocalDate dateOfTransaction = LocalDate.parse(ledgerTransaction.split("\\|")[0]);
+                            if (dateOfTransaction.getYear() == year) {
+                                output.append(ledgerTransaction).append("\n");
+                            }
+                        } catch (DateTimeParseException e) {
+
+                        }
+                    }
+                    break;
+                // previous year
+                case 4:
+                    for (String ledgerTransaction : ledger) {
+                        try {
+                            LocalDate dateOfTransaction = LocalDate.parse(ledgerTransaction.split("\\|")[0]);
+                            if (dateOfTransaction.getYear() == year - 1) {
+                                output.append(ledgerTransaction).append("\n");
+                            }
+                        } catch (DateTimeParseException e) {
+
+                        }
+                    }
+                    break;
+                // vendor
+                case 5:
+                    System.out.print("\nPlease enter the vendor name: ");
+
+                    // Case-insensitivity and trim whitespace.
+                    String vendorName = scanner.nextLine().toLowerCase().trim();
+                    // for each loop
+                    for (String ledgerTransaction : ledger) {
+                        try {
+                            String vendor = ledgerTransaction.split("\\|")[3].toLowerCase().trim();
+                            if (vendor.contains(vendorName)) {
+                                output.append(ledgerTransaction).append("\n");
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Exiting... Please Wait.");
+                    break;
+
+                default:
+                    System.out.println("Please select a valid option...");
+                    break;
+            }
+            if (output.isEmpty() && customSearchChoice != 0) {
+                System.out.println("There are no transactions that match your search. Please try another search.");
+            } else {
+                System.out.println(output);
+            }
+        } while (customSearchChoice != 0);
+    }
+
