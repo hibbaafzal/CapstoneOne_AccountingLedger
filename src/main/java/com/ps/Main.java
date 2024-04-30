@@ -9,45 +9,45 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int commandHomeScreen;
+        String commandHomeScreen;
 
         do {
             // asking user.
             System.out.println("Welcome to the Accounting Ledger Application!");
             System.out.println("What would you like to do?");
-            System.out.println("\t[1] Add Deposit");
-            System.out.println("\t[2] Make a Payment (Debit)");
-            System.out.println("\t[3] Ledger");
-            System.out.println("\t[4] Exit Application");
+            System.out.println("\t[D] Add Deposit");
+            System.out.println("\t[P] Make a Payment (Debit)");
+            System.out.println("\t[L] Ledger");
+            System.out.println("\t[X] Exit Application");
 
-            commandHomeScreen = scanner.nextInt();
+            commandHomeScreen = scanner.nextLine().toUpperCase();
 
             switch (commandHomeScreen) {
-                case 1:
+                case "D":
                     //array of strings called collected deposit information from user
-                    String[] collectedDepositInformationFromUser = information(scanner);
+                    String[] collectedDepositInformationFromUser = informationCollected(scanner);
 
                     if (collectedDepositInformationFromUser != null) {
                         // Static method in class ledger named add deposit information.
                         Ledger.addDepositInformation(collectedDepositInformationFromUser);
                     }
                     break;
-                case 2:
+                case "P":
                     //array of strings called collected payment information from user
-                    String[] collectedPaymentInformationFromUser = information(scanner);
+                    String[] collectedPaymentInformationFromUser = informationCollected(scanner);
 
                     if (collectedPaymentInformationFromUser != null) {
                         // Static method in class ledger named add payment information.
                         Ledger.addPaymentInformation(collectedPaymentInformationFromUser);
                     }
                     break;
-                case 3:
+                case "L":
                     System.out.println("Displaying Ledger. Please Wait...");
                     // Static method in class ledger named add home page.
                     Ledger.homePage(scanner);
 
                     break;
-                case 4:
+                case "X":
 
                     System.out.println("Exiting...");
                     System.out.println("Thank you for banking with us!");
@@ -57,7 +57,7 @@ public class Main {
                 default:
                     System.out.println("This is an invalid input. Please enter a valid input.");
             }
-        } while (commandHomeScreen != 4);
+        } while (!commandHomeScreen.equals ("X"));
 
 
     }
@@ -65,10 +65,10 @@ public class Main {
 
 // collecting information from the user about the transactions.
 
-    public static String[] information (Scanner scanner) {
+    public static String[] informationCollected(Scanner scanner) {
         System.out.print("Please enter item description: ");
         String description = scanner.nextLine();
-        scanner.nextLine();
+
 
         System.out.print("Please enter the vendor: ");
         String vendor = scanner.nextLine();
@@ -83,7 +83,7 @@ public class Main {
             return new String[]{description, vendor, Double.toString(dollarAmount)};
         } else {
             scanner.nextLine();
-            System.out.println("\nThe input type you have entered is incorrect. Please try again.");
+            System.out.println("\nYou have entered an incorrect input type. Please try again.");
             return null;
         }
     }
