@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class Ledger {
 
+
+
     // static method for the ledger home page.
     public static void homePage(Scanner scanner) {
 
@@ -30,29 +32,63 @@ public class Ledger {
             commandLedger = scanner.nextLine().toUpperCase();
 
             switch (commandLedger) {
+
+
                 case "A":
                     // all entries
+
+                    try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
+
+                    String input;
+                    while ((input = bufferedReader.readLine()) != null) {
+
+                        System.out.println(input);
+
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error!");
+                }
+                    break;
+
+                case "D":
+
+                    // deposits only so we filter for deposits only.
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
                         String input;
                         while ((input = bufferedReader.readLine()) != null) {
-                            System.out.println(input);
+
+                            String[] splitInput = input.split("\\|");
+                            if (!splitInput[splitInput.length - 1].contains("-")) {
+                                System.out.println(input);
+
+                            }
                         }
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                         System.out.println("Error!");
                     }
-
-                    break;
-
-                case "D":
-                    // deposits only so we filter for deposits only.
-                    ledgerDataReports("deposits only");
                     break;
 
                 case "P":
                     // payments only, so we filter for payments only.
-                    ledgerDataReports("payments only");
+
+                    try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
+
+                    String input;
+                    while ((input = bufferedReader.readLine()) != null) {
+                        String[] splitInput = input.split("\\|");
+                        if (splitInput[splitInput.length - 1].contains("-")) {
+                            System.out.println(input);
+
+
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error!");
+                }
                     break;
 
                 case "R":
@@ -74,8 +110,10 @@ public class Ledger {
     }
 
     // reads from the transactions file and returns an arraylist.
+
     public static List<String> ledgerDataReports() {
         List<String> ledgerData = new ArrayList<>();
+
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
 
@@ -89,76 +127,6 @@ public class Ledger {
         return ledgerData;
     }
 
-    // filters the transactions according to what the user chooses.
-    public static void ledgerDataReports(String customReportsFilter) {
-        List<String> ledgerTransactions = new ArrayList<>();
-
-
-        switch (customReportsFilter) {
-
-            // all reports
-            case "all reports":
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
-
-                    String input;
-                    while ((input = bufferedReader.readLine()) != null) {
-                        ledgerTransactions.add(input);
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error!");
-                }
-                displayLedgerData(ledgerTransactions);
-                break;
-
-            // deposits only (positive)
-            case "deposits only":
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
-
-                    String input;
-                    while ((input = bufferedReader.readLine()) != null) {
-
-                        String[] splitInput = input.split("\\|");
-                        if (!splitInput[splitInput.length - 1].contains("-")) {
-                            ledgerTransactions.add(input);
-                        }
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error!");
-                }
-                displayLedgerData(ledgerTransactions);
-                break;
-
-            // payments only (negative)
-            case "payments only":
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"));
-
-                    String input;
-                    while ((input = bufferedReader.readLine()) != null) {
-                        String[] splitInput = input.split("\\|");
-                        if (splitInput[splitInput.length - 1].contains("-")) {
-                            ledgerTransactions.add(input);
-                        }
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error!");
-                }
-                displayLedgerData(ledgerTransactions);
-                break;
-        }
-    }
-
-    public static void displayLedgerData(List<String> ledgerData) {
-        // for each loop (iterating through the array)
-
-        for (String transaction : ledgerData) {
-            if (transaction != null) {
-                System.out.println(transaction);
-            }
-        }
-    }
 
     // custom reports
     public static void customReports(Scanner scanner) {
@@ -178,7 +146,7 @@ public class Ledger {
             LocalDate date = LocalDate.now();
             int month = date.getMonthValue();
             int year = date.getYear();
-            List<String> ledger = ledgerDataReports();
+           List<String> ledger = ledgerDataReports();
             StringBuilder output = new StringBuilder();
 
             switch (customSearchChoice) {
