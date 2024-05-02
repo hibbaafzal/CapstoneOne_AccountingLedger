@@ -166,6 +166,9 @@ Once the user chooses to exit the application, an exit message will pop up and t
 
 This static method is a code for the password popup, when the user first begins to use the application.
 
+<img width="907" alt="Screenshot 2024-05-02 at 6 51 39 PM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/3920e48e-2728-48ff-b0df-4e844a05f653">
+
+
 <img width="1012" alt="Screenshot 2024-05-02 at 10 23 48 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/8666e397-e28c-496c-bb07-a741b8af4a69">
 
 
