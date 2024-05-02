@@ -94,7 +94,7 @@ public class Main {
     public static String[] informationCollected(Scanner scanner) {
 
 
-        System.out.print("Please enter description: ");
+        System.out.print("Please enter the description of your transaction: ");
         String description = scanner.nextLine();
 
 

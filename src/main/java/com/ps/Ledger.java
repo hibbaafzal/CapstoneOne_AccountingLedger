@@ -242,6 +242,7 @@ public class Ledger {
                         }
                     }
                     break;
+                // description
                 case 6:
                     System.out.println("------------------Search by Description----------------");
                     System.out.print("\nPlease enter the description: ");
@@ -263,7 +264,7 @@ public class Ledger {
                     }
                     break;
 
-
+                // exit custom search
                 case 0:
                     System.out.println("Exiting... Please Wait.");
                     break;
