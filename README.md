@@ -1,6 +1,7 @@
 # Accounting Ledger Application
 
 The goal of this application is to manage, add, and view transactions. The user can add a deposit or a payment, and are also be able to view all transactions or filter them viewing only deposits or only payments.
+
 The user may also view certain reports in the ledger such as month to date, previous month, year to date, previous year, search by the vendor, and a custom search, search by description. 
 
 ## Home Page
