@@ -1,14 +1,17 @@
 # Accounting Ledger Application
 
-The goal of this application is to manage, add, and view transactions. 
-The user can add a deposit or a payment, and are also be able to view all transactions or filter them viewing only deposits or only payments.
-
+The goal of this application is to manage, add, and view transactions. The user can add a deposit or a payment, and are also be able to view all transactions or filter them viewing only deposits or only payments.
 The user may also view certain reports in the ledger such as month to date, previous month, year to date, previous year, search by the vendor, and a custom search, search by description. 
 
 ## Home Page
 
-Before 
+When the user first opens the application, the first thing they are prompted to do is enter their username and password. 
 
+<img width="711" alt="Screenshot 2024-05-02 at 10 18 11 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/73f53513-69e9-49bc-9096-092600b21350">
+
+When entering the password, a popup will show up which allows for security of the user's password.
+
+<img width="264" alt="Screenshot 2024-05-02 at 10 19 51 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/d0d2f309-d94a-4198-8b00-62239d4d1299">
 
 
 <details> 
@@ -160,6 +163,9 @@ Once the user chooses to exit the application, an exit message will pop up and t
 
 ### Interesting Piece of Code
 
+This static method is a code for the password popup, when the user first begins to use the application.
+
+<img width="1012" alt="Screenshot 2024-05-02 at 10 23 48 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/8666e397-e28c-496c-bb07-a741b8af4a69">
 
 
 
