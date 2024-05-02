@@ -31,6 +31,8 @@ public class Main {
             password = String.valueOf(console.readPassword("Enter password: "));
         }
 
+        System.out.println("Authorizing.... Please Wait");
+        System.out.println("Authorization Complete!");
 
         String commandHomeScreen;
 
