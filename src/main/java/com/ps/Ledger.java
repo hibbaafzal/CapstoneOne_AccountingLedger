@@ -143,6 +143,7 @@ public class Ledger {
             System.out.println("\t[3] Year to date.");
             System.out.println("\t[4] Previous year.");
             System.out.println("\t[5] Search by vendor.");
+            System.out.println("\t[6] Search by description.");
             System.out.println("\t[0] Return to previous screen...");
 
             customSearchChoice = scanner.nextInt();
@@ -241,6 +242,26 @@ public class Ledger {
                         }
                     }
                     break;
+                case 6:
+                    System.out.println("------------------Search by Description----------------");
+                    System.out.print("\nPlease enter the description: ");
+
+
+                    String descriptionProvided = scanner.nextLine().toLowerCase().trim();
+                    // for each loop
+                    for (String ledgerTransaction : ledger) {
+
+
+                            try {
+                             String description = ledgerTransaction.split("\\|")[2].toLowerCase().trim();
+                                if (description.contains(descriptionProvided)) {
+                                    output.append(ledgerTransaction).append("\n");
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
+                        break;
 
                 case 0:
                     System.out.println("Exiting... Please Wait.");
@@ -285,4 +306,46 @@ public class Ledger {
 
 // static method to add the payment information into the file.
     // payments are negative
+
+    public static void addPaymentInformation(String[] paymentInformation) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        String formattedDateTime = dateTime.format(formatter);
+
+        String descriptionProvided = paymentInformation[0];
+        String vendorProvided = paymentInformation[1];
+
+        double dollarAmount = Double.parseDouble(paymentInformation[2]);
+        String informationProvided = String.format("%s|%s|%s|-$%.2f\n", formattedDateTime, descriptionProvided, vendorProvided, (dollarAmount));
+
+        enterInformationIntoFile(informationProvided);
+        System.out.println("\n\n***Your payment has been added successfully!***\n\n");
+
+
+    }
+
+// writes the information into the file
+
+    public static void enterInformationIntoFile
+            (String informationFromUser) {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.txt", true));
+
+            bufferedWriter.write(informationFromUser);
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            System.out.println("Error!");
+        }
+    }
+
+
+}
+
+
+
+
+
 

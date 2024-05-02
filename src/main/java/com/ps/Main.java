@@ -1,6 +1,15 @@
 package com.ps;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import static sun.security.util.Password.readPassword;
 
 public class Main {
 
@@ -13,7 +22,15 @@ public class Main {
 
         do {
             // asking user.
-            System.out.println("\n\n---------------Welcome to the Accounting Ledger Application!---------------");
+            System.out.println("\n\n-----------------Welcome to the Accounting Ledger Application!-----------------");
+
+            System.out.println("Please Enter you username");
+            String user = scanner.nextLine();
+            System.out.println("Please enter your password.");
+
+
+
+
             System.out.println("\nWhat would you like to do?");
             System.out.println("\t[D] Add Deposit");
             System.out.println("\t[P] Make a Payment (Debit)");
