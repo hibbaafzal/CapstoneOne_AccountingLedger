@@ -1,15 +1,10 @@
 package com.ps;
 
+
 import javax.swing.*;
-import java.awt.*;
-import java.io.BufferedReader;
 import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
-import static sun.security.util.Password.readPassword;
 
 public class Main {
 
@@ -17,18 +12,30 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("\n\n-----------------Welcome to the Accounting Ledger Application!-----------------");
+
+        System.out.println("Please enter your username.");
+        String user = scanner.nextLine();
+
+        // password
+
+        String password;
+
+        // if in production, console will run.
+        Console console = System.console();
+
+        if (console == null) { // development
+            password = getPasswordWithoutConsole("Enter password: ");
+
+        } else { // production
+            password = String.valueOf(console.readPassword("Enter password: "));
+        }
+
 
         String commandHomeScreen;
 
         do {
             // asking user.
-            System.out.println("\n\n-----------------Welcome to the Accounting Ledger Application!-----------------");
-
-            System.out.println("Please enter your username");
-            String user = scanner.nextLine();
-            System.out.println("Please enter your password.");
-
-
 
 
             System.out.println("\nWhat would you like to do?");
@@ -74,7 +81,7 @@ public class Main {
                 default:
                     System.out.println("This is an invalid input. Please enter a valid input.");
             }
-        } while (!commandHomeScreen.equals ("X"));
+        } while (!commandHomeScreen.equals("X"));
 
 
     }
@@ -85,8 +92,7 @@ public class Main {
     public static String[] informationCollected(Scanner scanner) {
 
 
-
-        System.out.print("Please enter item description: ");
+        System.out.print("Please enter description: ");
         String description = scanner.nextLine();
 
 
@@ -109,4 +115,18 @@ public class Main {
     }
 
 
+    public static String getPasswordWithoutConsole(String prompt) {
+
+        final JPasswordField passwordField = new JPasswordField();
+        return JOptionPane.showConfirmDialog(
+                null,
+                passwordField,
+                prompt,
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION ? new String(passwordField.getPassword()) : "";
+    }
 }
+
+
+
+

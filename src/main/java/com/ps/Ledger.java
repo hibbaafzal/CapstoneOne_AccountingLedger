@@ -252,16 +252,17 @@ public class Ledger {
                     for (String ledgerTransaction : ledger) {
 
 
-                            try {
-                             String description = ledgerTransaction.split("\\|")[2].toLowerCase().trim();
-                                if (description.contains(descriptionProvided)) {
-                                    output.append(ledgerTransaction).append("\n");
-                                }
-                            } catch (Exception e) {
-
+                        try {
+                            String description = ledgerTransaction.split("\\|")[2].toLowerCase().trim();
+                            if (description.contains(descriptionProvided)) {
+                                output.append(ledgerTransaction).append("\n");
                             }
+                        } catch (Exception e) {
+
                         }
-                        break;
+                    }
+                    break;
+
 
                 case 0:
                     System.out.println("Exiting... Please Wait.");
@@ -273,6 +274,8 @@ public class Ledger {
             }
             if (output.isEmpty() && customSearchChoice != 0) {
                 System.out.println("There are no transactions that match your search. Please try another search.");
+
+
             } else {
                 System.out.println(output);
             }
