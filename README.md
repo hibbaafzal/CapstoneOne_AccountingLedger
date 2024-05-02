@@ -21,14 +21,14 @@ When entering the password, a popup will show up which allows for security of th
 
 ### Adding Deposits 
 
-If the user chooses to add a deposit, they can select the corresponding choice for adding a deposit, and enter the necessary information. Once the deposit has been added, a message will pop up letting the user know their deposit has been added successfully. 
+If the user chooses to add a deposit, they can select the corresponding letter for adding a deposit, and enter the necessary information. Once the deposit has been added, a message will pop up letting the user know their deposit has been added successfully. 
 
 
 <img width="900" alt="Screenshot 2024-05-02 at 8 46 34 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/a223c041-fe79-4566-ab21-ebc4c30f3d41">
 
 ### Adding Payments
 
-If the user chooses to add a payment, they can select the corresponding choice for adding a payment, and enter the necessary information. Once the payment has been added, a message will pop up letting the user know their payment has been added successfully. 
+If the user chooses to add a payment, they can select the corresponding letter for adding a payment, and enter the necessary information. Once the payment has been added, a message will pop up letting the user know their payment has been added successfully. 
 
 <img width="907" alt="Screenshot 2024-05-02 at 8 50 41 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/6979301c-fa9d-42b9-80f2-9133347b06c7">
 
@@ -39,7 +39,7 @@ If the user chooses to add a payment, they can select the corresponding choice f
  **<summary> The Ledger </summary>**
  ### Home Page
 
- If the user wants to access the ledger they can type the corresponding choice and it will take them to the ledger home page. 
+ If the user wants to access the ledger they can type the corresponding letter and it will take them to the ledger home page. 
  
 <img width="902" alt="Screenshot 2024-05-02 at 8 53 27 AM" src="https://github.com/hibbaafzal/CapstoneOne_AccountingLedger/assets/166542360/3afbd7e1-8c56-4ded-a927-0dfb2d937da9">
 
