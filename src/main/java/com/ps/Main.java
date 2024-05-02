@@ -14,7 +14,7 @@ public class Main {
 
         System.out.println("\n\n-----------------Welcome to the Accounting Ledger Application!-----------------");
 
-        System.out.println("Please enter your username.");
+        System.out.print("Please enter your username: ");
         String user = scanner.nextLine();
 
         // password
