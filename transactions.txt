@@ -1,20 +1,12 @@
 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
 2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
 2024-04-12|10:13:25|Planner|Amazon|-8.50
-2024-05-01|21:17:36|Paid a bill|myself|-$20.00
-2024-05-02|08:46:18|Allowance|Dad|$20.00
+2024-04-01|21:17:36|Paid a bill|myself|-$20.00
 2024-05-02|08:50:30|Phone bill|Myself|-$31.47
-
 2024-05-02|10:21:56|Tax refund|NYS|$7500.97
 2024-05-02|11:07:28|Joe paid me back|Joe|$2300.00
 2024-05-02|11:08:07|Macbook|Apple|-$1700.45
 2024-05-02|13:26:56|Christmas Money|Family|$120.96
 2024-05-02|13:27:36|iPhone|Apple|-$999.99
 2024-05-02|14:56:57|Mom paid me back|Mom|$100.50
-2024-05-02|14:57:25|Phone bill|T-Mobile|-$100.00
-2024-05-02|17:41:22|Sister gave me money|Sister|$100.00
-2024-05-02|17:41:51|phone bll|T-Mobile|-$100.50
-2024-05-02|17:56:02|jiljds|dsfjkdsfjds|$10.89
-2024-05-02|17:56:12| ifjs;f|oi;jds;|-$40.00
-2024-05-02|18:07:27|fhsdkf|hewf;iwe|$9.00
-2024-05-02|18:07:39|jdfhsdjfk|dkjsfds|-$40.00
+
